@@ -17,7 +17,8 @@ use App\Http\Controllers\FlightController;
 //all listings
 Route::get('/', [FlightController::class, 'index']);
 
-
+//store new reservation
+Route::post('/reservation', [FlightController::class, 'store']);
 
 
 //single flight
