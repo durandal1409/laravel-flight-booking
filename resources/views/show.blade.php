@@ -18,10 +18,10 @@
     @error('email')
         <p class="text-red-500 text-xs mt-1">{{$message}}</p>
     @enderror
-    <button class="btn btn-primary" type="submit" >Submit</button>
+    <div>
+        @foreach ($seats as $seat)
+            <button class="btn sm btn-outline-secondary" type="input" name="seat" value={{$seat->seat_id}}>{{$seat->seat_number}}</button>
+        @endforeach
+    </div>
+    <button class="btn btn-primary outlined" type="submit" >Submit</button>
 </form>
-
-@foreach ($seats as $seat)
-    <span>{{$seat->seat_number}}</span>
-    
-@endforeach

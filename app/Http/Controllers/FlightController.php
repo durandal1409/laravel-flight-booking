@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Seat;
 use App\Models\Flight;
+use App\Models\Passenger;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -30,6 +31,8 @@ class FlightController extends Controller
     public function store(Request $request) {
         // TODO:
         // save passenger, flight and seat ids instead
+        // $request->input('seat');
+        dd($request);
         $formFields = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -37,8 +40,16 @@ class FlightController extends Controller
             'seat' => 'required'
         ]);
 
-        Reservation::create($formFields);
+        Reservation::create([
+            'passenger_id' => '5',
+            'flight_id' => '6',
+            'seat_id' => $request->input('seat')
+        ]);
+        // $passenger = Passenger::firstOrCreate(
+        //     ['email' => 'r@k.gmail.com'],
+        //     ['fname' => 'jj', 'lname' => 'll']
+        // );
 
-        return redirect('/')->with('message', 'Listing created successfully!');
+        return redirect('/'); //->with('message', 'Reservation created successfully!');
     }
 }
