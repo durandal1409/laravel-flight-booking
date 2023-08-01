@@ -18,8 +18,8 @@ use App\Http\Controllers\FlightController;
 Route::get('/', [FlightController::class, 'index']);
 
 //store new reservation
-Route::post('/reservation', [FlightController::class, 'store']);
+Route::post('/reservation/{flight_id}', [FlightController::class, 'store']);
 
 
 //single flight
-Route::get('/flights/{flight}', [FlightController::class, 'show']);
+Route::get('/flights/{flight_id}', [FlightController::class, 'show']);

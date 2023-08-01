@@ -3,7 +3,7 @@
 <h1>Flights</h1>
 @foreach ($flights as $flight)
     <div>
-        <a href="/flights/{{$flight->flight_number}}">
+        <a href="/flights/{{$flight->id}}">
             {{$flight->flight_number}}
         </a>
     </div>
