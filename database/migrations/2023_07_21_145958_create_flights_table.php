@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -13,26 +14,26 @@ return new class extends Migration
     {
         Schema::create('seats', function (Blueprint $table) {
             $table->id();
-            $table->string('seat_number');
+            $table->string('seat_number')->unique();
         });
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
-            $table->string('flight_number');
+            $table->string('flight_number')->unique();
         });
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
             $table->string('fname');
             $table->string('lname');
-            $table->string('email');
+            $table->string('email')->unique();
         });
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('passenger_id');
-            $table->foreign('passenger_id')->references('id')->on('passengers');
+            $table->foreign('passenger_id')->references('id')->on('passengers')->onDelete('cascade');
             $table->unsignedBigInteger('flight_id');
-            $table->foreign('flight_id')->references('id')->on('flights');
+            $table->foreign('flight_id')->references('id')->on('flights')->onDelete('cascade');
             $table->unsignedBigInteger('seat_id');
-            $table->foreign('seat_id')->references('id')->on('seats');
+            $table->foreign('seat_id')->references('id')->on('seats')->onDelete('cascade');
         });
     }
 
@@ -41,6 +42,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('flights');
+        Schema::dropIfExists('seats');
+        Schema::dropIfExists('passengers');
+        Schema::dropIfExists('reservations');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 };

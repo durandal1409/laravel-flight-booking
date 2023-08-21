@@ -20,9 +20,16 @@
     @enderror
     <div>
         @foreach ($seats as $seat)
-            <input class="btn sm btn-outline-secondary" type="radio" name="seat" value={{$seat->seat_number}}  id={{$seat->seat_id}} />
-            <label for={{$seat->seat_id}}>{{$seat->seat_number}}</label>
+            @php
+                if (in_array($seat->id, $seat_ids_in_reservations))
+                    $reserved = true;
+                else
+                    $reserved = false;
+            @endphp
+            <input class="btn sm btn-outline-secondary {{$reserved ? 'disabled' : ''}}" type="radio" name="seat_id" value={{$seat->id}} id={{$seat->id}} />
+            <label for={{$seat->id}}>{{$seat->seat_number}}</label>
         @endforeach
+        
     </div>
     <button class="btn btn-primary outlined" type="submit" >Submit</button>
 </form>

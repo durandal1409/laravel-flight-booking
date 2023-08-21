@@ -21,10 +21,11 @@ class FlightController extends Controller
         $seats = new Seat();
         $flights = new Flight();
         $reservations = new Reservation();
+        // dd($reservations->where('flight_id', $flight_id)->pluck('seat_id'));
         return view('show', [
             'flight' => $flights->where('id', $flight_id)->get(),
             'seats' => $seats->all(),
-            'reservations' => $reservations->where('flight_id', $flight_id)->get()
+            'seat_ids_in_reservations' => $reservations->where('flight_id', $flight_id)->pluck('seat_id')->toArray()
         ]);
     }
 
@@ -36,21 +37,23 @@ class FlightController extends Controller
             'fname' => 'required',
             'lname' => 'required',
             'email' => ['required', 'email'],
-            'seat' => 'required'
+            'seat_id' => 'required'
         ]);
 
-        $request->merge(['flight' => $flight_id]);
-        dd($request);
+        $request->merge(['flight_id' => $flight_id]);
+        // dd($request);
+
+        $passenger = Passenger::firstOrCreate(
+            ['email' =>  request('email')],
+            ['fname' => request('fname'),
+            'lname' => request('lname')]
+        );
 
         Reservation::create([
-            'passenger_id' => '5',
-            'flight_id' => '6',
-            'seat_id' => $formFields['seat']
+            'passenger_id' => $passenger->id,
+            'flight_id' => $flight_id,
+            'seat_id' => $request->seat_id
         ]);
-        // $passenger = Passenger::firstOrCreate(
-        //     ['email' => 'r@k.gmail.com'],
-        //     ['fname' => 'jj', 'lname' => 'll']
-        // );
 
         return redirect('/'); //->with('message', 'Reservation created successfully!');
     }
