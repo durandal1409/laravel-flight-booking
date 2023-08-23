@@ -43,10 +43,20 @@ class DatabaseSeeder extends Seeder
             'seat_number'=> '2c'
         ]);
         Flight::create([
-            'flight_number' => 'MA-234'
+            'flight_number' => 'MA-234',
+            'airline' => 'S7',
+            'from' => 'Montreal',
+            'to' => 'Toronto',
+            'departure' => '2023-12-26 07:00:00',
+            'arrival' => '2023-12-26 08:19:00'
         ]);
         Flight::create([
-            'flight_number' => 'QZ-908'
+            'flight_number' => 'QZ-908',
+            'airline' => 'Nordwind',
+            'from' => 'Montreal',
+            'to' => 'Toronto',
+            'departure' => '2023-12-26 09:15:00',
+            'arrival' => '2023-12-26 10:35:00'
         ]);
         Passenger::create([
             'fname' => 'Rony',

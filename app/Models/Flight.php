@@ -9,4 +9,8 @@ class Flight extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $casts = [
+        'departure' => 'datetime',
+        'arrival' => 'datetime'
+    ];
 }

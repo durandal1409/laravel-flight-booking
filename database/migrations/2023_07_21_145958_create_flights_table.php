@@ -19,6 +19,11 @@ return new class extends Migration
         Schema::create('flights', function (Blueprint $table) {
             $table->id();
             $table->string('flight_number')->unique();
+            $table->string('airline');
+            $table->string('from');
+            $table->string('to');
+            $table->dateTime('departure');
+            $table->dateTime('arrival');
         });
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();

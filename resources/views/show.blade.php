@@ -1,5 +1,9 @@
-@include('layout')
-<span>{{$flight[0]->flight_number}}</span>
+@extends('layout')
+@section('content')
+
+<div class="container booking-form-container">
+<h3>Your flight from {{$flight[0]->from}} to {{$flight[0]->to}}</h3>
+<x-flight-card :flight="$flight[0]" :select='false'/>
 
 <form method="post" action='/reservation/{{$flight[0]->id}}' class='mb-3'>
     @csrf
@@ -18,18 +22,26 @@
     @error('email')
         <p class="text-red-500 text-xs mt-1">{{$message}}</p>
     @enderror
-    <div>
-        @foreach ($seats as $seat)
-            @php
-                if (in_array($seat->id, $seat_ids_in_reservations))
-                    $reserved = true;
-                else
-                    $reserved = false;
-            @endphp
-            <input class="btn sm btn-outline-secondary {{$reserved ? 'disabled' : ''}}" type="radio" name="seat_id" value={{$seat->id}} id={{$seat->id}} />
-            <label for={{$seat->id}}>{{$seat->seat_number}}</label>
-        @endforeach
-        
-    </div>
-    <button class="btn btn-primary outlined" type="submit" >Submit</button>
+        {{-- <div class="container"> --}}
+            <div class="row justify-content-between mb-3">
+                <label>Seat</label>
+                @foreach ($seats as $seat)
+                    @php
+                        if (in_array($seat->id, $seat_ids_in_reservations))
+                            $reserved = true;
+                        else
+                            $reserved = false;
+                    @endphp
+                    <div class="col-3 m-3 p-2 seat {{$reserved ? 'reserved-seat' : 'available-seat'}}">
+                        <div class="form-check {{$reserved ? 'disabled' : ''}}">
+                            <input class="form-check-input" type="radio" name="seat_id" value={{$seat->id}} id={{$seat->id}} {{$reserved ? 'disabled' : ''}}/>
+                            <label class="form-check-label" for={{$seat->id}}>{{$seat->seat_number}}</label>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        {{-- </div> --}}
+    <button class="btn btn-warning btn-lg" type="submit" >Submit</button>
 </form>
+</div>
+@endsection
