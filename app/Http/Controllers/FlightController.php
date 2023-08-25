@@ -31,8 +31,6 @@ class FlightController extends Controller
 
     // store new reservation
     public function store(Request $request, $flight_id) {
-        // TODO:
-        // save passenger, flight and seat ids instead
         $formFields = $request->validate([
             'fname' => 'required',
             'lname' => 'required',
@@ -41,7 +39,6 @@ class FlightController extends Controller
         ]);
 
         $request->merge(['flight_id' => $flight_id]);
-        // dd($request);
 
         $passenger = Passenger::firstOrCreate(
             ['email' =>  request('email')],

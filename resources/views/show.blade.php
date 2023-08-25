@@ -10,19 +10,18 @@
     <label for="fname" class="">First Name</label>
     <input type="text" name="fname" id="fname" class="form-control" value="{{old('fname')}}" /><br>
     @error('fname')
-        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+        <p class="alert alert-danger">{{$message}}</p>
     @enderror
     <label for="lname" class="">Last Name</label>
     <input type="text" name="lname" id="lname" class="form-control" value="{{old('lname')}}" /><br>
     @error('lname')
-        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+        <p class="alert alert-danger">{{$message}}</p>
     @enderror
     <label for="email" class="">Email</label>
     <input type="email" name="email" id="email" class="form-control" value="{{old('email')}}" /><br>
     @error('email')
-        <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+        <p class="alert alert-danger">{{$message}}</p>
     @enderror
-        {{-- <div class="container"> --}}
             <div class="row justify-content-between mb-3">
                 <label>Seat</label>
                 @foreach ($seats as $seat)
@@ -40,7 +39,9 @@
                     </div>
                 @endforeach
             </div>
-        {{-- </div> --}}
+    @error('seat_id')
+        <p class="alert alert-danger">{{$message}}</p>
+    @enderror
     <button class="btn btn-warning btn-lg" type="submit" >Submit</button>
 </form>
 </div>
