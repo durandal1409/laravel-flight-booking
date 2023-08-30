@@ -13,17 +13,17 @@
         </div>
         <div class="card-body">
           <div class="container">
-            <div class="row">
-              <div class="col-sm">{{$flight->airline}}</div>
-              <div class="col-sm">{{$flight->departure->format('M d Y')}}</div>
-              <div class="col-sm">{{$flight->departure->format('H:m A')}}</div>
-              <div class="col-sm">{{$flight->from}}</div>
+            <div class="row g-1">
+              <div class="col">{{$flight->airline}}</div>
+              <div class="col">{{$flight->departure->format('M d Y')}}</div>
+              <div class="col">{{$flight->departure->format('H:m A')}}</div>
+              <div class="col">{{$flight->from}}</div>
             </div>
-            <div class="row">
-              <div class="col-sm">{{$flight->flight_number}}</div>
-              <div class="col-sm">{{$flight->arrival->format('M d Y')}}</div>
-              <div class="col-sm">{{$flight->arrival->format('H:m A')}}</div>
-              <div class="col-sm">{{$flight->to}}</div>
+            <div class="row g-1">
+              <div class="col">{{$flight->flight_number}}</div>
+              <div class="col">{{$flight->arrival->format('M d Y')}}</div>
+              <div class="col">{{$flight->arrival->format('H:m A')}}</div>
+              <div class="col">{{$flight->to}}</div>
             </div>
           </div>
         </div>

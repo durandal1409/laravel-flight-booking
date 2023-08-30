@@ -5,6 +5,7 @@
 <h3>Your flight from {{$flight[0]->from}} to {{$flight[0]->to}}</h3>
 <x-flight-card :flight="$flight[0]" :select='false'/>
 
+{{-- reservation form --}}
 <form method="post" action='/reservation/{{$flight[0]->id}}' class='mb-3'>
     @csrf
     <label for="fname" class="">First Name</label>
@@ -26,6 +27,7 @@
                 <label>Seat</label>
                 @foreach ($seats as $seat)
                     @php
+                        // check if seat is reserved
                         if (in_array($seat->id, $seat_ids_in_reservations))
                             $reserved = true;
                         else
