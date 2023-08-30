@@ -8,7 +8,6 @@
 .available-seat {
     background-color: lightgreen;
 }
-
 .card-header-flex {
     display: flex;
     justify-content: space-between;
