@@ -2,7 +2,7 @@
 
     <div class="card mb-4">
         <div class="card-header">
-          <div class="card-header-flex">
+          <div class="d-flex justify-content-between align-items-center">
             <h3>$300</h3>
             @if ($select)
               <a href="/flights/{{$flight->id}}" class='btn btn-warning btn-lg'>
